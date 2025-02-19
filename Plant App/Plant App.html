@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watering Can</title>
+    <style>
+        .watering-can {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 400px; /* Adjust the size as needed */
+            height: auto;
+        }
+        .bottom-right-image {
+            position: absolute;
+            top: 150px; /* Adjust the position based on the size of the watering can */
+            left: 150px; /* Adjust the position based on the size of the watering can */
+            width: 350px; /* Adjust the size as needed */
+            height: auto;
+        }
+        .new-image {
+            position: absolute;
+            top: 250px; /* Adjust the position based on the size of the water drops */
+            left: 250px; /* Adjust the position based on the size of the water drops */
+            width: 700px; /* Adjust the size as needed */
+            height: auto;
+        }
+        .bottom-right-image {
+            position: absolute;
+            top: calc(50px + 250px - 90px); /* Adjust the position based on the size of the watering can */
+            left: calc(50px + 250px - 35px); /* Adjust the position based on the size of the watering can */
+            width: 500px; /* Adjust the size as needed */
+            height: auto;
+        }
+        .new-image {
+            position: absolute;
+            top: calc(50px + 250px - 90px + 100px - 90px); /* Adjust the position based on the size of the water drops */
+            left: calc(50px + 250px - 50px + 100px - 15px); /* Adjust the position based on the size of the water drops */
+            width: 500px; /* Adjust the size as needed */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <img src="Watering Can.jpg" alt="Watering Can" class="watering-can" id="watering-can">
+    <img src="Water Drops.png" alt="Water Drops" class="bottom-right-image">
+    <img src="Plant 1.png" alt="New Image" class="new-image" id="new-image">
+
+
+</body>
+<style>
+    @keyframes wiggle {
+        0%, 100% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-5deg);
+        }
+        75% {
+            transform: rotate(5deg);
+        }
+    }
+    .wiggle {
+        animation: wiggle 0.5s;
+    }
+</style>
+
+<script>
+    const plantImages = [
+        'Plant 1.png',
+        'Plant 2.png',
+        'Plant 3.png',
+        'Plant 4.png',
+        'Plant 5.png'
+    ];
+    let currentImageIndex = 0;
+
+    document.getElementById('watering-can').addEventListener('click', () => {
+        const waterDropsImage = document.querySelector('.bottom-right-image');
+        waterDropsImage.classList.add('wiggle');
+
+        waterDropsImage.addEventListener('animationend', () => {
+            waterDropsImage.classList.remove('wiggle');
+            currentImageIndex = (currentImageIndex + 1) % plantImages.length;
+            document.getElementById('new-image').src = plantImages[currentImageIndex];
+        }, { once: true });
+    });
+
+    document.getElementById('watering-can').style.cursor = 'pointer';
+</script>
